@@ -1,6 +1,6 @@
 <h1>ExpNo 5 : Implement Simple Hill Climbing Algorithm</h1> 
-<h3>Name:             </h3>
-<h3>Register Number:             </h3>
+<h3>Name: K Deekshitha    </h3>
+<h3>Register Number: 2305002005            </h3>
 <H3>Aim:</H3>
 <p>Implement Simple Hill Climbing Algorithm and Generate a String by Mutating a Single Character at each iteration </p>
 <h2> Theory: </h2>
@@ -39,62 +39,42 @@ Feedback is provided in terms of heuristic function
 <p> Lopp Step -2 and Step-3  until we achieve the score to be Zero to achieve Global Minima.</p>
 
 ## PROGRAM
-```python
+```
 import random
 import string
-def generate_random_solution(answer):
-    l=len(answer)
-    return [random.choice(string.printable) for _ in range(l)]
-def evaluate(solution,answer):
-    print(solution)
-    target=list(answer)
-    diff=0
-    for i in range(len(target)):
-        s=solution[i]
-        t=target[i]
-        #to calculate the "difference" between two strings, character by character.
-        #ord(s) - ord(t) calculates the difference between the ASCII values of the characters s and t.
-         #abs() takes the absolute value of this difference to ensure that it is non-negative. This is important because the difference could be negative if s is less than t in terms of ASCII value.
-         #The absolute value ensures that the difference is always positive or zero.
-        diff += abs(ord(s) - ord(t))    return diff
-def mutate_solution(solution):
-    ind=random.randint(0,len(solution)-1)
-    solution[ind]=random.choice(string.printable)
-    return solution
-def SimpleHillClimbing():
-    answer="Artificial Intelligence"
-    best=generate_random_solution(answer)
-    best_score=evaluate(best,answer)
-    while True:
-       print("Score:", best_score, " Solution: ", "".join(best))  
-       if best_score == 0:
-           break
-       new_solution = mutate_solution(list(best))
-       score = evaluate(new_solution, answer)
-       if score < best_score:
-           best = new_solution
-           best_score = score
-SimpleHillClimbing()
-```
 
-<hr>
-<h2>Sample Input and Output</h2>
-<h2>Sample String:</h2> Artificial Intelligence
-<h2>Output:</h2>
-Score: 643  Solution :  8RzF:oG ]%;CPORRMe!zGvk<br>
-Score: 609  Solution :  8RzF:oG ]%;CPqRRMe!zGvk<br>
-Score: 604  Solution :  8RzF:oG ]%;CPqRRMe!zGqk<br>
-Score: 594  Solution :  8RzF:oG ]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-....................................................<br>
-..................................................<br>
-................................................<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 0  Solution :  Artificial Intelligence<br>
+answer = "Artificial Intelligence"
+gen = lambda: [random.choice(string.printable) for _ in range(len(answer))]
+score = lambda s: sum(abs(ord(a)-ord(b)) for a, b in zip(s, answer))
+
+best = gen()
+iteration = 0
+
+while True:
+    current_score = score(best)
+    solution_str = "".join(best)
+    print(f"Iteration: {iteration} | Score: {current_score} | Current Best: {solution_str}")
+    if current_score == 0:
+        print("\nTarget reached!")
+        break
+    new = best[:]
+    new[random.randrange(len(answer))] = random.choice(string.printable)
+    if score(new) < current_score:
+        best = new
+    iteration += 1
+
+```
+# Sample Input and Output
+
+# Sample String
+Artificial Intelligence
+
+# Output:
+<img width="701" height="471" alt="image" src="https://github.com/user-attachments/assets/7c127bb6-aecd-4e0e-9cf5-bdfd6c027f14" />
+
+<img width="724" height="548" alt="image" src="https://github.com/user-attachments/assets/2ea1a836-697d-4810-9a9f-5f8eb64f68a5" />
+
+# Result:
+Thus the program to Implement Simple Hill Climbing Algorithm has been executed successfully.
+
+
